@@ -11,8 +11,8 @@
   client.onMessageArrived = onMessageArrived;
   var options = {
    useSSL: false,
-    userName: "iatorres@hotmail.es",
-    password: "israel123torres",
+    userName: "jefferhopit88@gmail.com",
+    password: "Viejopito_88",
     onSuccess:onConnect,
     onFailure:doFail
   }
@@ -25,7 +25,7 @@
     // Once a connection has been made, make a subscription and send a message.
     console.log("Conectado...");
 	
-    client.subscribe("iatorres@hotmail.es/test");
+    client.subscribe("jefferhopit88@gmail.com/test1");
 
 	
   }
@@ -74,7 +74,7 @@ function Activar(){
 		texto.innerText=" Apagar ";
         animacion.src="/static/images/reg1.gif";
         message = new Paho.MQTT.Message("1,"+texHora);
-        message.destinationName = "iatorres@hotmail.es/test1";
+        message.destinationName = "jefferhopit88@gmail.com/test1";
         client.send(message);
     }
     else
@@ -82,13 +82,13 @@ function Activar(){
 		texto.innerText='Encender';
         animacion.src="/static/images/reg.png"
         message = new Paho.MQTT.Message("0,"+texHora);
-        message.destinationName = "iatorres@hotmail.es/test1";
+        message.destinationName = "jefferhopit88@gmail.com/test1";
         client.send(message);
 	}
 }
 function enviarH(){
     message = new Paho.MQTT.Message("0,"+texHora);
-	message.destinationName = "iatorres@hotmail.es/test1";
+	message.destinationName = "jefferhopit88@gmail.com/test1";
 	client.send(message);
 }
 
