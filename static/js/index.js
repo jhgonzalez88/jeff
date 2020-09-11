@@ -1,34 +1,18 @@
-//https://www.eclipse.org/paho/clients/js/
-
-function LED1_On() {
-	alert("led on");
-	console.log("led on");
-	document.getElementById("sensor").innerHTML="led on";
-  
-}
-function LED1_Off(){	
-	alert("led off");
-	console.log("led off");
-	document.getElementById("sensor").innerHTML="led off";
-}
-
-
-
-
-
-
 // Create a client instance
-  //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);
+  //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);7
   
   client = new Paho.MQTT.Client("maqiatto.com", 8883, "web_" + parseInt(Math.random() * 100, 10));
-
+  
+  var info,activar,texHora,valor,Sactivar,HCom,Ntank;
+  
+  info=["","",""];
   // set callback handlers
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
   var options = {
    useSSL: false,
-    userName: "lfrenteriax@hotmail.com",
-    password: "lfrenteriax",
+    userName: "iatorres@hotmail.es",
+    password: "israel123torres",
     onSuccess:onConnect,
     onFailure:doFail
   }
@@ -41,10 +25,8 @@ function LED1_Off(){
     // Once a connection has been made, make a subscription and send a message.
     console.log("Conectado...");
 	
-    client.subscribe("lfrenteriax@hotmail.com/test");
-    message = new Paho.MQTT.Message("hola desde la web");
-    message.destinationName = "lfrenteriax@hotmail.com/test1";
-    client.send(message);
+    client.subscribe("iatorres@hotmail.es/test");
+
 	
   }
 
@@ -62,6 +44,53 @@ function LED1_Off(){
 
   // called when a message arrives
   function onMessageArrived(message) {
-    console.log("onMessageArrived:"+message.payloadString);
+    val=document.getElementById('meter5');
+    console.log(message.payloadString);
+    info=message.payloadString.split(",");
+    activar=parseInt(info[0]);
+    valor=parseInt(info[1]);
+    val.value=valor;
+    Activar();
   }
+
+  function ObtenerDatos(){
+	
+    var hora1=document.getElementById('HoraS').value;
+    
+	texHora=hora1;
+	if(texHora==""){
+		alert("Ingrese Todos los Parámetros")
+	}else{
+		texDia.innerText=texHora;
+		Cerrar();
+	}
+
+		
+}
+
+function Activar(){
+    
+	if((texto.innerText=='Encender'|| activar==1)&&(valor!=0)){
+		texto.innerText=" Apagar ";
+        animacion.src="/static/images/reg1.gif";
+        message = new Paho.MQTT.Message("1,"+texHora);
+        message.destinationName = "iatorres@hotmail.es/test1";
+        client.send(message);
+    }
+    else
+	{
+		texto.innerText='Encender';
+        animacion.src="/static/images/reg.png"
+        message = new Paho.MQTT.Message("0,"+texHora);
+        message.destinationName = "iatorres@hotmail.es/test1";
+        client.send(message);
+	}
+}
+function enviarH(){
+    message = new Paho.MQTT.Message("0,"+texHora);
+	message.destinationName = "iatorres@hotmail.es/test1";
+	client.send(message);
+}
+
+  
   
