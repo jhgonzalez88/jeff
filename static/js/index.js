@@ -25,7 +25,7 @@
     // Once a connection has been made, make a subscription and send a message.
     console.log("Conectado...");
 	
-    client.subscribe("jefferhopit88@gmail.com/test1");
+    client.subscribe("jefferhopit88@gmail.com/test");
 
 	
   }
